@@ -496,13 +496,16 @@ function BlueSpawnFunc(SpawnGroup, Region, Offensive)
 			SpawnGroup:TaskRouteToZone( Warzone.North.Zones[Warzone.North.RedIndex], false, 15, "On Road" )
 		end
 		local tmpCoord = SpawnGroup:GetCoordinate()
-		if SpawnGroup.Mark then
-			tmpCoord:RemoveMark ( SpawnGroup.Mark )
-		end
-		if SpawnGroup.Engaged then
-			SpawnGroup.Mark = tmpCoord:MarkToCoalitionBlue( "Group : " .. SpawnGroup.Callsign .. "\nFrequency : " .. (SpawnGroup.Frequency / 1000000) .. "MHz.\nEngaged : true " )
-		else
-			SpawnGroup.Mark = tmpCoord:MarkToCoalitionBlue( "Group : " .. SpawnGroup.Callsign .. "\nFrequency : " .. (SpawnGroup.Frequency / 1000000) .. "MHz.\nEngaged : false " )
+		if ( SpawnGroup:GetCoordinate() ) then
+			local tmpCoord = SpawnGroup:GetCoordinate()
+			if SpawnGroup.Mark then
+				tmpCoord:RemoveMark ( SpawnGroup.Mark )
+			end
+			if SpawnGroup.Engaged then
+				SpawnGroup.Mark = tmpCoord:MarkToCoalitionBlue( "Group : " .. SpawnGroup.Callsign .. "\nFrequency : " .. (SpawnGroup.Frequency / 1000000) .. "MHz.\nEngaged : true " )
+			else
+				SpawnGroup.Mark = tmpCoord:MarkToCoalitionBlue( "Group : " .. SpawnGroup.Callsign .. "\nFrequency : " .. (SpawnGroup.Frequency / 1000000) .. "MHz.\nEngaged : false " )
+			end
 		end
 	end
 end
